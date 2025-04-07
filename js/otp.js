@@ -18,7 +18,7 @@ class OTPEncryptor {
     encryptText() {
         const textInput = document.getElementById('inputText').value;
         if (!textInput) {
-            return alert('Введіть текст для шифрування!');
+            return alert('Please enter text to encrypt!');
         }
         
         // Перетворення тексту в масив байтів
@@ -43,7 +43,7 @@ class OTPEncryptor {
     // Завантаження зашифрованого тексту і ключа у двійковому форматі
     downloadEncryptedText() {
         if (!this.encryptedTextResult || !this.textEncryptionKey) {
-            return alert('Спочатку зашифруйте текст!');
+            return alert('First encrypt the text!');
         }
         
         this.downloadFile(this.encryptedTextResult, 'ciphertext.txt');
@@ -63,25 +63,25 @@ class OTPEncryptor {
     // Копіювання зашифрованого тексту у форматі Base64
     copyEncryptedText() {
         if (!this.encryptedTextResult) {
-            return alert('Спочатку зашифруйте текст!');
+            return alert('First encrypt the text!');
         }
         
         // Конвертація байтів у Base64 для зручного копіювання
         const base64Encoded = btoa(String.fromCharCode.apply(null, this.encryptedTextResult));
         this.copyToClipboard(base64Encoded);
-        alert('Зашифрований текст скопійовано у форматі Base64!');
+        alert('The encrypted text is copied in Base64 format!');
     }
     
     // Копіювання ключа у форматі Base64
     copyEncryptionKey() {
         if (!this.textEncryptionKey) {
-            return alert('Спочатку зашифруйте текст!');
+            return alert('First encrypt the text!');
         }
         
         // Конвертація байтів у Base64 для зручного копіювання
         const base64Key = btoa(String.fromCharCode.apply(null, this.textEncryptionKey));
         this.copyToClipboard(base64Key);
-        alert('Ключ шифрування скопійовано у форматі Base64!');
+        alert('The encryption key is copied in Base64 format!');
     }
     
     // Допоміжний метод для копіювання в буфер обміну
@@ -97,7 +97,7 @@ class OTPEncryptor {
         try {
             document.execCommand('copy');
         } catch (err) {
-            console.error('Не вдалося скопіювати текст: ', err);
+            console.error('Text could not be copied: ', err);
         }
         
         document.body.removeChild(textArea);
@@ -106,7 +106,7 @@ class OTPEncryptor {
     // Оригінальний метод для шифрування файлу
     encryptFile() {
         let fileInput = document.getElementById('inputFile').files[0];
-        if (!fileInput) return alert('Оберіть файл для шифрування!');
+        if (!fileInput) return alert('Select the file to encrypt!');
         
         let reader = new FileReader();
         reader.onload = (event) => {
@@ -125,7 +125,7 @@ class OTPEncryptor {
     decryptFile() {
         let encFile = document.getElementById('encryptedFile').files[0];
         let keyFile = document.getElementById('keyFile').files[0];
-        if (!encFile || !keyFile) return alert('Оберіть файли для розшифрування!');
+        if (!encFile || !keyFile) return alert('Select files to decrypt!');
         
         // Додаємо виявлення формату файлу
         let reader1 = new FileReader();
@@ -172,7 +172,7 @@ class OTPEncryptor {
                 }
                 
                 if (encryptedData.length !== key.length) {
-                    return alert('Ключ і зашифрований файл мають різну довжину!');
+                    return alert('Key and encrypted file have different lengths!');
                 }
                 
                 let decryptedData = this.xorEncryptDecrypt(encryptedData, key);
@@ -246,7 +246,7 @@ class OTPEncryptor {
         const textArea = document.getElementById('decryptedTextArea');
         if (textArea && textArea.value) {
             this.copyToClipboard(textArea.value);
-            alert('Розшифрований текст скопійовано!');
+            alert('Decrypted text copied!');
         }
     }
     

@@ -213,7 +213,7 @@ class RSAEncryptor {
                 this.showGeneratingMessage(false);
             } catch (error) {
                 console.error('Error generating key pair:', error);
-                alert('Ошибка при генерации ключей. Проверьте консоль для деталей.');
+                alert('Error during key generation. Check the console for details.');
                 this.showGeneratingMessage(false);
             }
         }, 100);
